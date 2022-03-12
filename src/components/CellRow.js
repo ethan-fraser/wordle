@@ -14,6 +14,8 @@ class CellRow extends React.Component {
             this.cellRefs.push(React.createRef());
             return <Cell key={i} ref={this.cellRefs[i]} value={cell.value} evaluation={cell.evaluation} />
         })
+        this.state.cells.push(<div></div>)
+        this.cellRefs.push(React.createRef())
     }
 
     updateCellValue(newValue) {
@@ -21,10 +23,9 @@ class CellRow extends React.Component {
             if (this.state.currentLetter === 0) {
                 return false
             }
-            let letterToDelete = this.state.currentLetter === 4 ? 4 : this.state.currentLetter - 1;
-            this.cellRefs[letterToDelete].current.updateValue("");
+            this.cellRefs[this.state.currentLetter].current.updateValue("");
             this.setState({
-                currentLetter: this.state.currentLetter === 4 ? 3 : this.state.currentLetter - 1,
+                currentLetter: this.state.currentLetter - 1,
             })
 
             console.log(this.state.currentLetter)
