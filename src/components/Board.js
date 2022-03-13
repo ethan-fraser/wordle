@@ -13,19 +13,34 @@ function getOtherIndecesOfLetter(word, letter, currentindex) {
     return indeces
 }
 
+function cellFactory() {
+    return {
+        evaluation: "empty",
+        value: "",
+    }
+}
+
 class Board extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            cells: [],
             cellRows: [],
             currentGuess: 0,
             correctWord: "world",
         }
+        for (let i = 0; i < 6; i++) {
+            let temp = [];
+            for (let i = 0; i < 5; i++) {
+                temp.push(cellFactory())
+            }
+            this.state.cells.push(temp);
+        }
         this.cellRowRefs = [];
         for (let i = 0; i < 6; i++) {
             this.cellRowRefs.push(React.createRef());
-            this.state.cellRows.push(<CellRow key={i} ref={this.cellRowRefs[i]} cells={this.props.cells[i]}/>)
+            this.state.cellRows.push(<CellRow key={i} ref={this.cellRowRefs[i]} cells={this.state.cells[i]}/>)
         }
     }
 
@@ -43,10 +58,13 @@ class Board extends React.Component {
         for (let i = 0; i < this.state.correctWord.length; i++) {
             if (guess[i] === this.state.correctWord[i]){
                 this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "correct");
+                this.props.keyboardRef.current.setKeyState(guess[i].toUpperCase(), "correct");
             } else if (this.state.correctWord.indexOf(guess[i]) > -1) {
                 this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "present");
+                this.props.keyboardRef.current.setKeyState(guess[i].toUpperCase(), "present");
             } else {
                 this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "empty");
+                this.props.keyboardRef.current.setKeyState(guess[i].toUpperCase(), "absent");
             }
         }
 
