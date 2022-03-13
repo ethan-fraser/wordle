@@ -32,7 +32,7 @@ class Key extends React.Component {
         }
 
         return (
-            <button onClick={() => {this.sendKey(this)}} className={"h-12 flex flex-col justify-center rounded " + color + " " + width}>
+            <button onClick={() => {this.sendKey(this)}} className={"h-12 flex flex-col justify-center shadow-lg rounded " + color + " " + width}>
                 <span className="text-center">{this.props.value}</span>
             </button>
         );
