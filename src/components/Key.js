@@ -3,7 +3,9 @@ import React from 'react';
 class Key extends React.Component {
 
     sendKey(self) {
-        self.props.boardRef.current.updateCellValue(self.props.value);
+        if (!self.props.disabled) {
+            self.props.boardRef.current.updateCellValue(self.props.value);
+        }
     }
 
     render() {

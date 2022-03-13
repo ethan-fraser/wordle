@@ -14,7 +14,7 @@ class CellRow extends React.Component {
             this.cellRefs.push(React.createRef());
             return <Cell key={i} ref={this.cellRefs[i]} value={cell.value} evaluation={cell.evaluation} />
         })
-        this.state.cells.push(<div></div>)
+        this.state.cells.push(<div key="42069"></div>)
         this.cellRefs.push(React.createRef())
     }
 
@@ -40,19 +40,27 @@ class CellRow extends React.Component {
         }
     }
 
-    updateCellEvaluation(newEval) {
-        this.cellRefs[this.state.currentLetter].current.updateEvaluation(newEval);
+    getRowAsString() {
+        let values = [];
+        for (let i = 0; i < this.cellRefs.length-1; i++) {
+            values.push(this.cellRefs[i].current.getValue());
+        }
+        return values.join("").toLowerCase();
     }
 
-    componentDidUpdate() {
-        for (let i = 0; i < this.state.cells.length-1; i++) {
-            if (i === this.state.currentLetter) {
-                this.cellRefs[i].current.updateEvaluation("present");
-            } else if (i < 5) {
-                this.cellRefs[i].current.updateEvaluation("empty");
-            }
-        }
+    updateCellEvaluation(i, newEval) {
+        this.cellRefs[i].current.updateEvaluation(newEval);
     }
+
+    // componentDidUpdate() {
+    //     for (let i = 0; i < this.state.cells.length-1; i++) {
+    //         if (i === this.state.currentLetter) {
+    //             this.cellRefs[i].current.updateEvaluation("present");
+    //         } else if (i < 5) {
+    //             this.cellRefs[i].current.updateEvaluation("empty");
+    //         }
+    //     }
+    // }
 
     render() {
         return (

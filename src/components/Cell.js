@@ -16,6 +16,10 @@ class Cell extends React.Component {
         })
     }
 
+    getValue() {
+        return this.state.value;
+    }
+
     updateEvaluation(newEval) {
         this.setState({
             evaluation: newEval,
