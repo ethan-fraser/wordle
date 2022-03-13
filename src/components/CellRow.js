@@ -23,29 +23,35 @@ class CellRow extends React.Component {
             if (this.state.currentLetter === 0) {
                 return false
             }
-            this.cellRefs[this.state.currentLetter].current.updateValue("");
+            this.cellRefs[this.state.currentLetter - 1].current.updateValue("");
             this.setState({
                 currentLetter: this.state.currentLetter - 1,
             })
-
-            console.log(this.state.currentLetter)
         } else if (newValue === "Enter") {
-            
-        } else {
-            this.cellRefs[this.state.currentLetter].current.updateValue(newValue);
-            if (this.state.currentLetter === 4) {
+            if (this.state.currentLetter === 5) {
                 return true;
-            } else {
-                this.setState({
-                    currentLetter: this.state.currentLetter + 1
-                })
-                return false;
             }
+        } else if (this.state.currentLetter < 5) {
+            this.cellRefs[this.state.currentLetter].current.updateValue(newValue);
+            this.setState({
+                currentLetter: this.state.currentLetter + 1
+            })
+            return false;
         }
     }
 
     updateCellEvaluation(newEval) {
         this.cellRefs[this.state.currentLetter].current.updateEvaluation(newEval);
+    }
+
+    componentDidUpdate() {
+        for (let i = 0; i < this.state.cells.length-1; i++) {
+            if (i === this.state.currentLetter) {
+                this.cellRefs[i].current.updateEvaluation("present");
+            } else if (i < 5) {
+                this.cellRefs[i].current.updateEvaluation("empty");
+            }
+        }
     }
 
     render() {
