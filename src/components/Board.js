@@ -50,8 +50,8 @@ class Board extends React.Component {
 
         if (fiveletterwords.indexOf(guess) === -1) {
             // invalid guess
-            console.log("invalid guess");
-            // this.props.NIWLRef.current.show();
+            this.props.NIWLBannerRef.current.show();
+            return false;
         }
 
         // work out initial colours of cells
@@ -88,6 +88,10 @@ class Board extends React.Component {
             }
         }
 
+        this.setState({
+            currentGuess: this.state.currentGuess + 1,
+        })
+
         return false;
 
     }
@@ -99,9 +103,6 @@ class Board extends React.Component {
             if (evaluation) {
                 this.props.keyboardRef.current.setDisabled(true);
             }
-            this.setState({
-                currentGuess: this.state.currentGuess + 1
-            })
         }
         if (this.state.currentGuess === 6) {
             // TODO: game over here
