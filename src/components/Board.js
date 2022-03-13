@@ -20,7 +20,7 @@ class Board extends React.Component {
         this.state = {
             cellRows: [],
             currentGuess: 0,
-            correctWord: "whole",
+            correctWord: "world",
         }
         this.cellRowRefs = [];
         for (let i = 0; i < 6; i++) {
@@ -46,7 +46,7 @@ class Board extends React.Component {
             } else if (this.state.correctWord.indexOf(guess[i]) > -1) {
                 this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "present");
             } else {
-                this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "absent");
+                this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "empty");
             }
         }
 
@@ -65,7 +65,7 @@ class Board extends React.Component {
                     }
                 }
                 if (allInstancesFound) {
-                    this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "absent");
+                    this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "empty");
                 }
             }
         }
