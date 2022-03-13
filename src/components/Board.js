@@ -16,12 +16,17 @@ class Board extends React.Component {
         }
     }
 
+    evaluate() {
+
+    }
+
     updateCellValue(newValue) {
         let endOfRow = this.cellRowRefs[this.state.currentGuess].current.updateCellValue(newValue);
         if (endOfRow) {
-            // this.setState({
-            //     currentGuess: this.state.currentGuess + 1
-            // })
+            this.evaluate();
+            this.setState({
+                currentGuess: this.state.currentGuess + 1
+            })
         }
         if (this.state.currentGuess === 6) {
             // TODO: game over here

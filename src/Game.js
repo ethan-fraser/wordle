@@ -53,7 +53,7 @@ class Game extends React.Component {
     render() {
         return (
             <div className="w-screen h-screen bg-grey grid grid-cols-1 content-evenly">
-                <Board ref={this.boardRef} cells={this.state.cells}/>
+                <Board ref={this.boardRef} cells={this.state.cells} />
                 <Keyboard boardRef={this.boardRef} keys={this.state.keys} sendKey={this.sendKey}/>
             </div>
         );
