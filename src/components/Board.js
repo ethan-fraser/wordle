@@ -98,16 +98,16 @@ class Board extends React.Component {
     }
 
     updateCellValue(newValue) {
-        let endOfRow = this.cellRowRefs[this.state.currentGuess].current.updateCellValue(newValue);
-        if (endOfRow) {
+        let newLine = this.cellRowRefs[this.state.currentGuess].current.updateCellValue(newValue);
+        if (newLine) {
             let evaluation = this.evaluate();
             if (evaluation) {
                 this.props.keyboardRef.current.setDisabled(true);
             }
-        }
-        if (this.state.currentGuess === 6) {
-            // TODO: game over here
-            console.log("game over")
+            if (this.state.currentGuess === 5) {
+                this.props.keyboardRef.current.setDisabled(true);
+                this.props.gameOverBannerRef.current.show(this.state.correctWord.toUpperCase());
+            }
         }
     }
 
