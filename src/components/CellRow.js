@@ -8,6 +8,7 @@ class CellRow extends React.Component {
         this.state = {
             cells: [],
             currentLetter: 0,
+            shake: false,
         }
         this.cellRefs = [];
         this.state.cells = this.props.cells.map((cell, i) => {
@@ -16,6 +17,17 @@ class CellRow extends React.Component {
         })
         this.state.cells.push(<div key="42069"></div>)
         this.cellRefs.push(React.createRef())
+    }
+
+    shake() {
+        this.setState({
+            shake: true,
+        })
+        setTimeout(() => {
+            this.setState({
+                shake: false,
+            })
+        }, 820);
     }
 
     updateCellValue(newValue) {
@@ -52,19 +64,13 @@ class CellRow extends React.Component {
         this.cellRefs[i].current.updateEvaluation(newEval);
     }
 
-    // componentDidUpdate() {
-    //     for (let i = 0; i < this.state.cells.length-1; i++) {
-    //         if (i === this.state.currentLetter) {
-    //             this.cellRefs[i].current.updateEvaluation("present");
-    //         } else if (i < 5) {
-    //             this.cellRefs[i].current.updateEvaluation("empty");
-    //         }
-    //     }
-    // }
-
     render() {
+        let shakeClass = "";
+        if (this.state.shake) {
+            shakeClass = "animate-shake";
+        }
         return (
-            <div className="flex justify-center gap-1">
+            <div className={"flex justify-center gap-1 " + shakeClass}>
                 {this.state.cells}
             </div>
         );

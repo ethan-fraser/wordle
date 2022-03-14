@@ -33,7 +33,7 @@ class NIWLBanner extends React.Component {
     
     render() {
         return (
-            <div className="absolute grid grid-cols-1 justify-self-center mt-20">
+            <div className="absolute grid grid-cols-1 justify-self-center mt-20 z-10">
                 {this.state.banners}
             </div>
         );

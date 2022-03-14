@@ -51,6 +51,7 @@ class Board extends React.Component {
         if (fiveletterwords.indexOf(guess) === -1) {
             // invalid guess
             this.props.NIWLBannerRef.current.show();
+            this.cellRowRefs[this.state.currentGuess].current.shake();
             return false;
         }
 

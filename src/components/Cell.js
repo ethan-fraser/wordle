@@ -45,7 +45,7 @@ class Cell extends React.Component {
         };
 
         return (
-            <div className={"flex flex-col justify-center shadow-md w-16 h-16 " + color}>
+            <div className={"flex flex-col justify-center shadow-md w-16 h-16 z-0 " + color}>
                 <span className="text-center font-bold text-white">{this.state.value}</span>
             </div>
         );
