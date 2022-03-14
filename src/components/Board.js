@@ -28,7 +28,7 @@ class Board extends React.Component {
             cells: [],
             cellRows: [],
             currentGuess: 0,
-            correctWord: "world",
+            correctWord: fiveletterwords[Math.floor(Math.random() * (fiveletterwords.length))],
         }
         for (let i = 0; i < 6; i++) {
             let temp = [];

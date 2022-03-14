@@ -40,13 +40,13 @@ class Cell extends React.Component {
                 break;
             case "empty":
             default:
-                color = "bg-white";
+                color = "bg-darkgrey";
                 break;
         };
 
         return (
             <div className={"flex flex-col justify-center shadow-md w-16 h-16 " + color}>
-                <span className="text-center">{this.state.value}</span>
+                <span className="text-center font-bold text-white">{this.state.value}</span>
             </div>
         );
     }

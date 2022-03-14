@@ -22,21 +22,18 @@ class NIWLBanner extends React.Component {
             banners: temp,
         })
 
-        console.log(this.state.banners);
         setTimeout(() => {
             temp = [...this.state.banners];
             temp.shift();
             this.setState({
                 banners: temp,
             });
-
-            console.log(this.state.banners)
         }, 1000)
     }
     
     render() {
         return (
-            <div className="absolute grid grid-cols-1 justify-self-center mt-3">
+            <div className="absolute grid grid-cols-1 justify-self-center mt-20">
                 {this.state.banners}
             </div>
         );

@@ -20,6 +20,11 @@ class Game extends React.Component {
     render() {
         return (
             <div className="w-screen h-screen bg-grey grid grid-cols-1 content-evenly">
+                <div>
+                    <div className="flex justify-center text-4xl font-bold font-wider text-white -mt-10">
+                        <span className="text-green">W</span><span className="text-yellow">O</span>R<span className="text-yellow">D</span><span className="text-green">L</span>E
+                    </div>
+                </div>
                 <NIWLBanner ref={this.NIWLBannerRef} />
                 <Board ref={this.boardRef} keyboardRef={this.keyboardRef} NIWLBannerRef={this.NIWLBannerRef}/>
                 <Keyboard ref={this.keyboardRef} boardRef={this.boardRef} sendKey={this.sendKey}/>
