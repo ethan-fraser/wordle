@@ -16,5 +16,4 @@ npm run start
 
 ### Preview
 
-![Image of partially completed game of wordle to show the responsive keyboard](./screenshots/partial.png)
 ![Image of completed game of wordle](./screenshots/done.png)
