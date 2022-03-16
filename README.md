@@ -1,4 +1,4 @@
-# Worlde
+# Wordle
 
 This is a clone of the wordle game found at nytimes.com/games/wordle that I created to practice using React and Tailwind.
 
