@@ -44,6 +44,23 @@ class Board extends React.Component {
         }
     }
 
+    handleKeydown(event) {
+        if ("QWERTYUIOPASDFGHJKLZXCVBNM".includes(event.key.toUpperCase())) {
+            this.boardRef.current.updateCellValue(event.key.toUpperCase());
+        }
+        if (event.key === "Backspace") {
+            this.boardRef.current.updateCellValue("⌫");
+        }
+        if (event.key === "Enter") {
+            this.boardRef.current.updateCellValue("Enter");
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener('keydown', this.handleKeydown);
+        window.boardRef = this.props.boardRef;
+    }
+
     evaluate() {
 
         let guess = this.cellRowRefs[this.state.currentGuess].current.getRowAsString();
@@ -85,13 +102,10 @@ class Board extends React.Component {
                 }
                 if (allInstancesFound) {
                     this.cellRowRefs[this.state.currentGuess].current.updateCellEvaluation(i, "empty");
+                    this.props.keyboardRef.current.setKeyState(this.state.correctWord[i].toUpperCase(), "absent")
                 }
             }
         }
-
-        this.setState({
-            currentGuess: this.state.currentGuess + 1,
-        })
 
         return false;
 
@@ -103,10 +117,18 @@ class Board extends React.Component {
             let evaluation = this.evaluate();
             if (evaluation) {
                 this.props.keyboardRef.current.setDisabled(true);
+                window.removeEventListener('keydown', this.handleKeydown);
+            } else {
+                this.setState({
+                    currentGuess: this.state.currentGuess + 1,
+                })
+                if (this.state.currentGuess === 5) {
+                    this.props.gameOverBannerRef.current.show(this.state.correctWord.toUpperCase());
+                }
             }
             if (this.state.currentGuess === 5) {
                 this.props.keyboardRef.current.setDisabled(true);
-                this.props.gameOverBannerRef.current.show(this.state.correctWord.toUpperCase());
+                window.removeEventListener('keydown', this.handleKeydown);
             }
         }
     }
@@ -116,6 +138,7 @@ class Board extends React.Component {
     }
 
     render() {
+        console.log(this.state.currentGuess)
         return (
             <div className="flex flex-col content-center gap-1">
                 {this.state.cellRows}

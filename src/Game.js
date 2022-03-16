@@ -8,10 +8,6 @@ class Game extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            cells: [],
-            keys: [],
-        };
 
         this.NIWLBannerRef = React.createRef();
         this.boardRef = React.createRef();
@@ -28,7 +24,7 @@ class Game extends React.Component {
                     </div>
                 </div>
                 <NIWLBanner ref={this.NIWLBannerRef} />
-                <Board ref={this.boardRef} keyboardRef={this.keyboardRef} NIWLBannerRef={this.NIWLBannerRef} gameOverBannerRef={this.gameOverBannerRef}/>
+                <Board ref={this.boardRef} boardRef={this.boardRef} keyboardRef={this.keyboardRef} NIWLBannerRef={this.NIWLBannerRef} gameOverBannerRef={this.gameOverBannerRef}/>
                 <GameOverBanner ref={this.gameOverBannerRef} />
                 <Keyboard ref={this.keyboardRef} boardRef={this.boardRef} sendKey={this.sendKey}/>
             </div>
